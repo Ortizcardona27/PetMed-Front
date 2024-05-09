@@ -1,75 +1,96 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
-  const [documentType, setDocumentType] = useState("");
-  const [documentNumber, setDocumentNumber] = useState("");
-  const [cellPhone, setCellPhone] = useState("");
+  const [tipoDocumento, setTipoDocumento] = useState("");
+  const [nroDocumento, setNroDocumento] = useState("");
+  const [telefonoCelular, setTelefonoCelular] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [razonSocial, setRazonSocial] = useState("");
-  const [firstName, setFirstName] = useState(""); // nuevo campo para nombre
-  const [lastName, setLastName] = useState(""); // nuevo campo para apellido
-  const [birthDate, setBirthDate] = useState(""); // nuevo campo para fecha de nacimiento
+  const [Nombre, setNombre] = useState("");
+  const [primerApellido, setPrimerApellido] = useState("");
+  const [segundoApellido, setSegundoApellido] = useState("");
+  const [fechaNacimiento, setFechaNacimiento] = useState("");
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Validate form fields here
-    if (documentType === "") {
-      setErrors({ ...errors, documentType: "El tipo de documento es requerido." });
+    if (tipoDocumento === "") {
+      setErrors({ ...errors, tipoDocumento: "El tipo de documento es requerido." });
     }
-    if (documentNumber === "") {
-      setErrors({ ...errors, documentNumber: "El número de documento es requerido." });
+    if (nroDocumento === "") {
+      setErrors({ ...errors, nroDocumento: "El número de documento es requerido." });
     }
-    if (cellPhone === "") {
-      setErrors({ ...errors, cellPhone: "El número de celular es requerido." });
+    if (telefonoCelular === "") {
+      setErrors({ ...errors, telefonoCelular: "El número de celular es requerido." });
+    } else if (!/^[0-9]{10}$/.test(telefonoCelular)) {
+      setErrors({ ...errors, telefonoCelular: "El número de celular debe tener 10 dígitos." });
     }
     if (email === "") {
       setErrors({ ...errors, email: "El email es requerido." });
+    } else if (!/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+      setErrors({ ...errors, email: "El email debe ser válido." });
     }
     if (password === "") {
       setErrors({ ...errors, password: "La contraseña es requerida." });
     }
-    if (documentType === "nit" && razonSocial === "") {
+    if (tipoDocumento === "nit" && razonSocial === "") {
       setErrors({ ...errors, razonSocial: "La razón social es requerida." });
     }
-    if (documentType === "cedula de ciudadania" && (firstName === "" || lastName === "" || birthDate === "")) {
-      setErrors({ ...errors, firstName: "El nombre es requerido.", lastName: "El apellido es requerido.", birthDate: "La fecha de nacimiento es requerida." });
+    if (tipoDocumento === "cedula de ciudadania" && (Nombre === "" || primerApellido === "" || segundoApellido === "" || fechaNacimiento === "")) {
+      setErrors({ ...errors, Nombre: "El nombre es requerido.", primerApellido: "El primer apellido es requerido.", segundoApellido: "El segundo apellido es requerido.", fechaNacimiento: "La fecha de nacimiento es requerida." });
     }
-    // If no errors, submit form here
+
+    if (Object.keys(errors).length === 0) {
+      // No errors, send request to API
+      fetch(`http://localhost:8085/usuarios/usuario/tipo-documento`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ tipoDocumento: tipoDocumento })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          // Handle successful response here
+          // For example, you can save the user data in the state or redirect to another page
+        })
+        .catch(error => console.error(error));
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="form blue">
       <div className="form-group">
-        <label htmlFor="documentType">Tipo de documento:</label>
+        <label htmlFor="tipoDocumento">Tipo de documento:</label>
         <select
-          id="documentType"
-          value={documentType}
-          onChange={(e) => setDocumentType(e.target.value)}
+          id="tipoDocumento"
+          value={tipoDocumento}
+          onChange={(e) => setTipoDocumento(e.target.value)}
           className="form-control"
         >
           <option value="">Selecciona una opción</option>
           <option value="nit">NIT</option>
           <option value="cedula de ciudadania">Cédula de ciudadania</option>
         </select>
-        {errors.documentType && <p className="error">{errors.documentType}</p>}
+        {errors.tipoDocumento && <p className="error">{errors.tipoDocumento}</p>}
       </div>
       <div className="form-group">
-        <label htmlFor="documentNumber">Número de documento:</label>
+        <label htmlFor="nroDocumento">Número de documento:</label>
         <input
           type="text"
-          id="documentNumber"
-          value={documentNumber}
-          onChange={(e) => setDocumentNumber(e.target.value)}
+          id="nroDocumento"
+          value={nroDocumento}
+          onChange={(e) => setNroDocumento(e.target.value)}
           className="form-control"
         />
-        {errors.documentNumber && (
-          <p className="error">{errors.documentNumber}</p>
+        {errors.nroDocumento && (
+          <p className="error">{errors.nroDocumento}</p>
         )}
       </div>
-      {documentType === "nit" && (
+      {tipoDocumento === "nit" && (
         <div className="form-group">
           <label htmlFor="razonSocial">Razon social:</label>
           <input
@@ -82,53 +103,64 @@ const RegisterForm = () => {
           {errors.razonSocial && <p className="error">{errors.razonSocial}</p>}
         </div>
       )}
-      {documentType === "cedula de ciudadania" && (
+      {tipoDocumento === "cedula de ciudadania" && (
         <div>
           <div className="form-group">
-            <label htmlFor="firstName">Nombre:</label>
+            <label htmlFor="Nombre">Nombre:</label>
             <input
               type="text"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              id="Nombre"
+              value={Nombre}
+              onChange={(e) => setNombre(e.target.value)}
               className="form-control"
             />
-            {errors.firstName && <p className="error">{errors.firstName}</p>}
+            {errors.Nombre && <p className="error">{errors.Nombre}</p>}
           </div>
           <div className="form-group">
-            <label htmlFor="lastName">Apellido:</label>
+            <label htmlFor="primerApellido">Primer apellido:</label>
             <input
               type="text"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              id="primerApellido"
+              value={primerApellido}
+              onChange={(e) => setPrimerApellido(e.target.value)}
               className="form-control"
             />
-            {errors.lastName && <p className="error">{errors.lastName}</p>}
+            {errors.primerApellido && <p className="error">{errors.primerApellido}</p>}
           </div>
           <div className="form-group">
-            <label htmlFor="birthDate">Fecha de nacimiento:</label>
+            <label htmlFor="segundoApellido">Segundo apellido:</label>
+            <input
+              type="text"
+              id="segundoApellido"
+              value={segundoApellido}
+              onChange={(e) => setSegundoApellido(e.target.value)}
+              className="form-control"
+            />
+            {errors.segundoApellido && <p className="error">{errors.segundoApellido}</p>}
+          </div>
+          <div className="form-group">
+            <label htmlFor="fechaNacimiento">Fecha de nacimiento:</label>
             <input
               type="date"
-              id="birthDate"
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
+              id="fechaNacimiento"
+              value={fechaNacimiento}
+              onChange={(e) => setFechaNacimiento(e.target.value)}
               className="form-control"
             />
-            {errors.birthDate && <p className="error">{errors.birthDate}</p>}
+            {errors.fechaNacimiento && <p className="error">{errors.fechaNacimiento}</p>}
           </div>
         </div>
       )}
       <div className="form-group">
-        <label htmlFor="cellPhone">Teléfono celular:</label>
+        <label htmlFor="telefonoCelular">Número de celular:</label>
         <input
           type="text"
-          id="cellPhone"
-          value={cellPhone}
-          onChange={(e) => setCellPhone(e.target.value)}
+          id="telefonoCelular"
+          value={telefonoCelular}
+          onChange={(e) => setTelefonoCelular(e.target.value)}
           className="form-control"
         />
-        {errors.cellPhone && <p className="error">{errors.cellPhone}</p>}
+        {errors.telefonoCelular && <p className="error">{errors.telefonoCelular}</p>}
       </div>
       <div className="form-group">
         <label htmlFor="email">Email:</label>
@@ -152,8 +184,8 @@ const RegisterForm = () => {
         />
         {errors.password && <p className="error">{errors.password}</p>}
       </div>
-      <button type="submit" className="btn btn-primary">
-        Registrarme
+      <button type="submit" className="btn">
+        Registrarse
       </button>
     </form>
   );
