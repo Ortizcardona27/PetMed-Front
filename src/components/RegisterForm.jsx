@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 
 const RegisterForm = () => {
   const [tipoDocumento, setTipoDocumento] = useState("");
@@ -58,6 +60,35 @@ const RegisterForm = () => {
           // For example, you can save the user data in the state or redirect to another page
         })
         .catch(error => console.error(error));
+    }
+    if (Object.keys(errors).length === 0) {
+      // No errors, send request to API
+      axios.post('http://127.0.0.1:8085/usuarios/persona/crear', {
+        tipoDocumento: tipoDocumento,
+        nroDocumento: nroDocumento,
+        telefonoCelular: telefonoCelular,
+        email: email,
+        password: password,
+        razonSocial: razonSocial,
+        Nombre: Nombre,
+        primerApellido: primerApellido,
+        segundoApellido: segundoApellido,
+        fechaNacimiento: fechaNacimiento
+      })
+        .then(response => {
+          console.log(response.data);
+          alert('Se registro con exito')
+          // Handle successful response here
+          // For example, you can save the user data in the state or redirect to another page
+        })
+        .catch(error => {
+          console.error(error.response.data);
+          alert('Hay un error')
+
+
+          // Handle error response here
+          // For example, you can show an error message to the user
+        });
     }
   };
 
