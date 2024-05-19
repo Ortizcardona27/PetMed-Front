@@ -46,12 +46,12 @@ const RegisterForm = () => {
 
     if (Object.keys(errors).length === 0) {
       // No errors, send request to API
-      fetch(`http://localhost:8085/usuarios/usuario/tipo-documento`, {
-        method: 'POST',
+      fetch(`/usuarios/usuario/tipo-documento`, {
+        method: 'GET',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ tipoDocumento: tipoDocumento })
       })
         .then(response => response.json())
         .then(data => {
@@ -63,7 +63,7 @@ const RegisterForm = () => {
     }
     if (Object.keys(errors).length === 0) {
       // No errors, send request to API
-      axios.post('http://127.0.0.1:8085/usuarios/persona/crear', {
+      axios.post('/usuarios/persona/crear', {
         tipoDocumento: tipoDocumento,
         nroDocumento: nroDocumento,
         telefonoCelular: telefonoCelular,
