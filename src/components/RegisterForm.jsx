@@ -45,25 +45,30 @@ const RegisterForm = () => {
     }
 
     if (Object.keys(errors).length === 0) {
-      // No errors, send request to API
-      fetch(`/usuarios/usuario/tipo-documento`, {
+      // No hay errores, enviar solicitud a la API
+      fetch(`/api/usuarios/usuario/tipo-documento`, {
         method: 'GET',
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
       })
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
         .then(data => {
           console.log(data);
-          // Handle successful response here
-          // For example, you can save the user data in the state or redirect to another page
+          // Manejar la respuesta exitosa aquí
+          // Por ejemplo, puedes guardar los datos del usuario en el estado o redirigir a otra página
         })
-        .catch(error => console.error(error));
+        .catch(error => console.error('Error:', error));
     }
     if (Object.keys(errors).length === 0) {
       // No errors, send request to API
-      axios.post('/usuarios/persona/crear', {
+      axios.post('/api/usuarios/persona/crear', {
         tipoDocumento: tipoDocumento,
         nroDocumento: nroDocumento,
         telefonoCelular: telefonoCelular,
