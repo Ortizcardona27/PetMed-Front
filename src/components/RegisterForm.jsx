@@ -67,18 +67,20 @@ const RegisterForm = () => {
         .catch(error => console.error('Error:', error));
     }
     if (Object.keys(errors).length === 0) {
+      alert("Enviando formulario.")
       // No errors, send request to API
       axios.post('/api/usuarios/persona/crear', {
-        tipoDocumento: tipoDocumento,
         nroDocumento: nroDocumento,
+        tipoDocumento: tipoDocumento,
         telefonoCelular: telefonoCelular,
         email: email,
         password: password,
-        razonSocial: razonSocial,
-        Nombre: Nombre,
-        primerApellido: primerApellido,
-        segundoApellido: segundoApellido,
-        fechaNacimiento: fechaNacimiento
+        personaNatural: {
+          Nombre: Nombre,
+          primerApellido: primerApellido,
+          segundoApellido: segundoApellido,
+          fechaNacimiento: fechaNacimiento
+        }
       })
         .then(response => {
           console.log(response.data);
