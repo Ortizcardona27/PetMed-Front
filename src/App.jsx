@@ -5,17 +5,20 @@ import Navbar from "./components/Navbar";
 import RegisterForm from "./components/RegisterForm";
 import Footer from "./components/Footer";
 import Inicio from "./components/Inicio";
+import InicioSesion from "./components/InicioSesion";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+
         <Navbar />
 
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registerform" element={<RegisterForm />} />
+          <Route path="/iniciosesion" element={<InicioSesion />} />
         </Routes>
 
         <Footer />
