@@ -23,6 +23,11 @@ const Navbar = () => {
             Registro
           </Link>
         </li>
+        <li>
+          <Link className="menu-Link" to="/logout">
+            Logout
+          </Link>
+        </li>
       </ul>
     </nav>
   );

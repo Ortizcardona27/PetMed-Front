@@ -9,6 +9,11 @@ function LoginForm() {
     const top = (window.innerHeight - height) / 2;
     const options = `width=${width},height=${height},left=${left},top=${top}`;
     const loginPopup = window.open(url, 'loginPopup', options);
+    window.addEventListener('message', (event) => {
+      if (event.source === loginPopup && event.data === 'closed') {
+        console.log('La ventana emergente se ha cerrado');
+      }
+    });
   }
 
   return (
