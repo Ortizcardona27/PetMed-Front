@@ -6,6 +6,8 @@ import RegisterForm from "./components/RegisterForm";
 import Footer from "./components/Footer";
 import Inicio from "./components/Inicio";
 import InicioSesion from "./components/InicioSesion";
+import Salir from "./components/Salir";
+
 
 function App() {
   return (
@@ -19,6 +21,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registerform" element={<RegisterForm />} />
           <Route path="/iniciosesion" element={<InicioSesion />} />
+          <Route path="/logout" element={<Salir />} />
+
+
         </Routes>
 
         <Footer />

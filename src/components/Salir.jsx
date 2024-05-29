@@ -3,13 +3,13 @@ const log_out = () => {
     window.location.href = 'http://localhost:8082/logout';
 }
 
-function logout() {
+function Salir() {
     log_out();
     return (
-      <div className="form-container">
-        
-      </div>
+        <div className="form-container">
+
+        </div>
     );
-  }
-  
-  export default logout;
+}
+
+export default Salir;
