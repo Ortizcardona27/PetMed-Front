@@ -1,6 +1,6 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function(app) {
+module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
@@ -13,6 +13,14 @@ module.exports = function(app) {
     '/auth',
     createProxyMiddleware({
       target: 'http://127.0.0.1:8082',
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    '/adopciones',
+    createProxyMiddleware({
+      target: 'http://127.0.0.1:8085',
       changeOrigin: true,
     })
   );
