@@ -1,6 +1,6 @@
 const log_out = () => {
-    this.localStorageService.remove('token');
-    window.location.href = 'http://localhost:8082/logout';
+    localStorage.removeItem('token');
+    window.location.href = 'http://localhost:8082/logout?client_id=users-petmed';
 }
 
 function Salir() {
