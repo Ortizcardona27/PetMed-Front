@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Inicio = () => {
@@ -24,9 +25,10 @@ const Inicio = () => {
         fetchMascotas();
     }, [pagina]);
 
-    const handleAdoptar = (mascota) => {
-        // Aquí puedes agregar la lógica para adoptar la mascota
-        console.log(`Adoptar mascota: ${mascota.nombre}`);
+    const handleInfo = (mascota) => {
+        console.log(`Información mascota: ${mascota.nombre}`);
+        return <Link to="/infoMascota">Más información</Link>;
+        //{`/detalle-mascota/${mascota.id}`}
     };
 
     const handleSiguiente = () => {
@@ -52,7 +54,7 @@ const Inicio = () => {
                             <img src={`data:image/jpeg;base64,${mascota.imagen}`} alt={mascota.nombre} />
                             <h2>{mascota.nombre}</h2>
                             <p>{mascota.descripcion}</p>
-                            <button onClick={() => handleAdoptar(mascota)}>Adoptar</button>
+                            <button onClick={() => handleInfo(mascota)}>{handleInfo(mascota)}</button>
                         </div>
                     )))}
                     <div className="pagination-buttons">
