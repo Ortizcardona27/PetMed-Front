@@ -17,10 +17,10 @@ function LoginForm() {
   }
 
   return (
-    <div className="form-container">
-
-      <button onClick={onClic}>Iniciar sesión</button>
-
+    <div className="button-container">
+      <button onClick={onClic} className="button-blue">
+        Iniciar sesión
+      </button>
     </div>
   );
 }

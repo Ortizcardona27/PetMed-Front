@@ -9,23 +9,23 @@ const Navbar = () => {
       </Link>
       <ul className="menu">
         <li>
-          <Link className="menu-Link" to="/">
+          <Link to="/" className="menu-link">
             Inicio
           </Link>
         </li>
         <li>
-          <Link className="menu-Link" to="/login">
-            Login
+          <Link to="/login" className="menu-link">
+            Iniciar sesión
           </Link>
         </li>
         <li>
-          <Link className="menu-Link" to="/registerform">
-            Registro
+          <Link to="/registerform" className="menu-link">
+            Registrarse
           </Link>
         </li>
         <li>
-          <Link className="menu-Link" to="/logout">
-            Logout
+          <Link to="/logout" className="menu-link">
+            Cerrar sesión
           </Link>
         </li>
       </ul>
