@@ -27,7 +27,13 @@ const ModalMascota = () => {
     };
 
     const handleAdoptar = async () => {
-        console.log("mascota adoptada")
+        try {
+            // Lógica para adoptar la mascota (hacer una petición POST a la API)
+            const response = await axios.post(`http://localhost:8085/adopciones/adopcion/registrar`);
+            setAdoptada(true);
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
     return (
