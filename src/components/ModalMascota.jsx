@@ -10,7 +10,7 @@ const ModalMascota = () => {
     useEffect(() => {
         const fetchMascota = async () => {
             try {
-                const response = await axios.get(`http://localhost:8085/adopciones/mascota/detalle-mascota-adopcion?idMascota=${id}`);
+                const response = await axios.get(`http://localhost:8085/adopciones/mascota/detalle-mascota-adopcion?idMascota=27`);
                 setMascota(response.data);
             } catch (error) {
                 setError(error.message);
