@@ -10,7 +10,7 @@ const ModalMascota = () => {
     useEffect(() => {
         const fetchMascota = async () => {
             try {
-                const response = await axios.get(`http://localhost:8085/adopciones/mascota/detalle-mascota-adopcion?idMascota=27`);
+                const response = await axios.get(`http://localhost:8085/adopciones/mascota/detalle-mascota-adopcion?idMascota=${id}`);
                 setMascota(response.data);
             } catch (error) {
                 setError(error.message);
@@ -27,13 +27,7 @@ const ModalMascota = () => {
     };
 
     const handleAdoptar = async () => {
-        try {
-            // Lógica para adoptar la mascota (hacer una petición GET a la API)
-            const response = await axios.get(`http://localhost:8085/adopciones/mascota/adoptar-mascota?idMascota=27`);
-            setAdoptada(true);
-        } catch (error) {
-            setError(error.message);
-        }
+        console.log("mascota adoptada")
     };
 
     return (
