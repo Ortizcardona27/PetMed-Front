@@ -45,16 +45,14 @@ const InicioSesion = () => {
     token(code);
     if (localStorage.getItem('token')) {
       setLoggedIn(true);
+      alert('El usuario ha iniciado sesión correctamente');
+
     }
   }, [code]);
 
   return (
     <div>
-      {loggedIn ? (
-        <p>El usuario ha iniciado sesión correctamente</p>
-      ) : (
-        <p>Iniciando sesión...</p>
-      )}
+
     </div>
   )
 }

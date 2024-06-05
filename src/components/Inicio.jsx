@@ -27,8 +27,7 @@ const Inicio = () => {
 
     const handleInfo = (mascota) => {
         console.log(`Información mascota: ${mascota.nombre}`);
-        return <Link to="/infoMascota" className="Info">Más información</Link>;
-        //{`/detalle-mascota/${mascota.id}`}
+        return <Link to={`/infoMascota?idMascota=${mascota.idMascota}`} className="Info">Más información</Link>;
     };
 
     const handleSiguiente = () => {
