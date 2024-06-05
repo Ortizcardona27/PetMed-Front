@@ -193,13 +193,17 @@
 }
 
 .mascota-card button {
-  background-color: #337ab7; /* Azul claro */
+  background-color: #007bff; /* Azul claro */
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.Info{
+  color: white
 }
 
 .mascota-card button:hover {
@@ -248,6 +252,10 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 50%;
+}
+
+.a{
+  color: #000;
 }
 
 .modal-content h2 {
