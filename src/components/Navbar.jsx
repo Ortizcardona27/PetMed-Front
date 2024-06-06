@@ -14,6 +14,11 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+          <Link to="consultas" className="menu-link">
+            Consultas
+          </Link>
+        </li>
+        <li>
           <Link to="/login" className="menu-link">
             Iniciar sesión
           </Link>

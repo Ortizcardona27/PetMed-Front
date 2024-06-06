@@ -8,6 +8,7 @@ import Inicio from "./components/Inicio";
 import InicioSesion from "./components/InicioSesion";
 import Salir from "./components/Salir";
 import ModalMascota from "./components/ModalMascota";
+import Consultas from "./components/Consultas";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/infoMascota" element={<ModalMascota />} />
+          <Route path="/consultas" element={<Consultas />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registerform" element={<RegisterForm />} />
           <Route path="/iniciosesion" element={<InicioSesion />} />
