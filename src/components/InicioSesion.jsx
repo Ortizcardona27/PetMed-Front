@@ -19,7 +19,6 @@ const token = (code) => {
     }
   })
     .then(response => {
-      console.log(response);
       const token = JSON.stringify(response.data);
       localStorage.setItem('token', token);
       window.opener.postMessage('closed', '*');

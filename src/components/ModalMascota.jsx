@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const ModalMascota = () => {
@@ -9,6 +9,12 @@ const ModalMascota = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [adoptada, setAdoptada] = useState(false); // Nuevo estado para indicar si la mascota ha sido adoptada
     const navigate = useNavigate();
+    const params = useParams();
+    const idMascota = params.idMascota;
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const mascotaId = queryParams.get('idMascota');
+
 
 
     useEffect(() => {
@@ -17,7 +23,7 @@ const ModalMascota = () => {
         if (tokenString) {
             token = JSON.parse(tokenString);
         }
-        fetch(`/api/adopciones/mascota/detalle-mascota-adopcion?idMascota=21`, {
+        fetch(`/api/adopciones/mascota/detalle-mascota-adopcion?idMascota=${mascotaId}`, {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -45,28 +51,25 @@ const ModalMascota = () => {
     };
 
     const handleAdoptar = async () => {
-        try {
-            // Lógica para adoptar la mascota (hacer una petición POST a la API)
-            const tokenString = localStorage.getItem('token');
-            let token = {};
-            if (tokenString) {
-                token = JSON.parse(tokenString);
-            }
-            axios.post(`api/adopciones/adopcion/registrar`, {
-                idMascota: mascota.idMascota
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token.access_token}`
-                }
-            }).then(response => {
-                setExito()
-            });
-            setAdoptada(true);
-        } catch (error) {
-            console.log(error)
-            setError(error.response.data.respuesta);
+
+        // Lógica para adoptar la mascota (hacer una petición POST a la API)
+        const tokenString = localStorage.getItem('token');
+        let token = {};
+        if (tokenString) {
+            token = JSON.parse(tokenString);
         }
+        axios.post(`api/adopciones/adopcion/registrar`, {
+            idMascota: mascota.idMascota
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token.access_token}`
+            }
+        }).then(response => {
+            setExito(response.data.respuesta)
+        }).catch(error => {
+            setError(error.response.data.respuesta);
+        });
     };
 
     return (
@@ -79,7 +82,7 @@ const ModalMascota = () => {
                         </div>
                         <div className="modal-body">
                             {error ? (
-                                <p style={{ color: 'ed' }}>Error: {error}</p>
+                                <p style={{ color: 'ed' }}>{error}</p>
                             ) : (
                                 <div>
                                     <img src={`data:image/jpeg;base64,${mascota.imagen}`} alt={mascota.nombre} style={{ width: '100px', height: '100px', borderRadius: '100%' }} />
@@ -88,8 +91,8 @@ const ModalMascota = () => {
                                     <p>Descripcion: {mascota.descripcion}</p>
                                     <p>Rescatista: {mascota.rescatista}</p>
 
-                                    {adoptada ? (
-                                        <p style={{ color: 'green' }}>Mascota adoptada con éxito!</p>
+                                    {exito ? (
+                                        <p style={{ color: 'green' }}>{exito}</p>
                                     ) : (
                                         <button onClick={handleAdoptar} style={{ backgroundColor: '#007bff', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer' }}>
                                             Adoptar
