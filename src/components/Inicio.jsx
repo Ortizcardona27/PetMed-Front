@@ -4,7 +4,8 @@ import axios from 'axios';
 
 const Inicio = () => {
     const [mascotas, setMascotas] = useState({});
-    const [pagina, setPagina] = useState(1);  // Cambiado a 1 ya que tu API empieza en página 1
+    const [pagina, setPagina] = useState(0);  // Cambiado a 1 ya que tu API empieza en página 1
+    const [totalPagina, setTotalPagina] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -15,6 +16,8 @@ const Inicio = () => {
             try {
                 const response = await axios.get(`/api/adopciones/mascota/mascotas-destacadas?page=${pagina}`);
                 setMascotas(response.data);
+                setTotalPagina(response.data.totalPages);
+                console.log(response)
             } catch (error) {
                 setError('Error al cargar las mascotas. Intenta nuevamente.');
             } finally {
@@ -35,7 +38,7 @@ const Inicio = () => {
     };
 
     const handleAnterior = () => {
-        if (pagina > 1) {
+        if (pagina != 0) {
             setPagina(pagina - 1);
         }
     };
@@ -57,10 +60,10 @@ const Inicio = () => {
                         </div>
                     )))}
                     <div className="pagination-buttons">
-                        {pagina > 1 && (
+                        {(pagina != 0 && pagina < totalPagina) && (
                             <button onClick={handleAnterior}>Anterior</button>
                         )}
-                        {mascotas.length >= 5 && (
+                        {(pagina + 1 < totalPagina) && (
                             <button onClick={handleSiguiente}>Siguiente</button>
                         )}
                     </div>

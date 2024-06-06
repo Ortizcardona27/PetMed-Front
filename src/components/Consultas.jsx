@@ -11,9 +11,15 @@ const Consultas = () => {
         if (tokenString) {
             token = JSON.parse(tokenString);
         }
-        axios.get('api/adopciones/adopcion/solicitudes-activas')
+        axios.get('api/adopciones/adopcion/solicitudes-activas', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token.access_token}`
+            },
+        })
             .then(response => {
                 setSolicitudes(response.data);
+                console.log(response)
                 setLoading(false);
             })
             .catch(error => {
@@ -36,16 +42,20 @@ const Consultas = () => {
             ) : (
                 solicitudes.map(solicitud => (
                     <div key={solicitud.id} className="card">
-                        <img src={solicitud.mascota.imagen} alt={solicitud.mascota.nombre} />
+                        <img src={`data:image/jpeg;base64,${solicitud.imagen}`} alt={solicitud.mascota} />
                         <h2>{solicitud.mascota.nombre}</h2>
                         <p>Fundación: {solicitud.fundacion}</p>
                         <p>Estado: {solicitud.estado}</p>
                         {solicitud.estado === 'SOLICITUD' ? (
-                            <p>Esperando a que el estado sea FORMULARIO...</p>
+                            <p>Esperando respuesta de la fundación.</p>
                         ) : (
                             <div className="botones">
-                                <button className="btn-formulario" onClick={() => handleFormulario()}>Formulario</button>
-                                <button className="btn-cita" onClick={() => handleCita()}>Cita</button>
+                                {
+                                    solicitud.formulario && (<button className="btn-formulario" onClick={() => handleFormulario()}>Formulario</button>)
+                                }
+                                {
+                                    solicitud.cita && (<button className="btn-cita" onClick={() => handleCita()}>Cita</button>)
+                                }
                             </div>
                         )}
                     </div>
