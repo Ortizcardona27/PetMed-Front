@@ -213,7 +213,8 @@
 .pagination-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 170px;
+  margin-bottom: 20px; /* Agregué este margen para que los botones estén abajo */
 }
 
 .pagination-buttons button {
@@ -221,8 +222,8 @@
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 5px 10px; /* Reduje el padding para que los botones sean más pequeños */
+  font-size: 14px; /* Reduje el tamaño de la fuente para que los botones sean más pequeños */
   cursor: pointer;
   margin: 0 10px;
 }
@@ -230,6 +231,7 @@
 .pagination-buttons button:hover {
   background-color: #23527c; /* Azul oscuro */
 }
+
 
 /* Estilos para el modal de la mascota */
 .modal {
@@ -350,4 +352,50 @@ button:hover {
 
 .btn-formulario:hover,.btn-cita:hover {
   background-color: #23527c;
+}
+
+/* Estilos formulario de adopcion */
+.formulario {
+  background-color: #f7f7f7; /* Fondo claro */
+  padding: 30px;
+  border: 1px solid #3498db; /* Azul claro */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Ancho del formulario */
+  height: 350px; /* Alto del formulario */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #3498db; /* Azul claro */
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.boton {
+  background-color: #3498db; /* Azul claro */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #2e6da4; /* Azul oscuro */
 }

@@ -9,6 +9,7 @@ import InicioSesion from "./components/InicioSesion";
 import Salir from "./components/Salir";
 import ModalMascota from "./components/ModalMascota";
 import Consultas from "./components/Consultas";
+import AdopcionForm from "./components/AdopcionForm";
 
 
 function App() {
@@ -22,11 +23,11 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/infoMascota" element={<ModalMascota />} />
           <Route path="/consultas" element={<Consultas />} />
+          <Route path="consultas/adopcionForm" element={<AdopcionForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registerform" element={<RegisterForm />} />
           <Route path="/iniciosesion" element={<InicioSesion />} />
           <Route path="/logout" element={<Salir />} />
-
 
         </Routes>
 

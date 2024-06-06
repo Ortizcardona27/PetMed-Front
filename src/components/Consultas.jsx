@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 
 const Consultas = () => {
     const [solicitudes, setSolicitudes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         const tokenString = localStorage.getItem('token');
@@ -28,7 +32,7 @@ const Consultas = () => {
     }, []);
 
     const handleFormulario = () => {
-
+        navigate('adopcionForm')
     };
 
     const handleCita = () => {
@@ -43,7 +47,7 @@ const Consultas = () => {
                 solicitudes.map(solicitud => (
                     <div key={solicitud.id} className="card">
                         <img src={`data:image/jpeg;base64,${solicitud.imagen}`} alt={solicitud.mascota} />
-                        <h2>{solicitud.mascota.nombre}</h2>
+                        <h2>{solicitud.mascota}</h2>
                         <p>Fundación: {solicitud.fundacion}</p>
                         <p>Estado: {solicitud.estado}</p>
                         {solicitud.estado === 'SOLICITUD' ? (

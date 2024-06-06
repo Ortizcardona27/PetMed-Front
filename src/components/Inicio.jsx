@@ -60,12 +60,14 @@ const Inicio = () => {
                         </div>
                     )))}
                     <div className="pagination-buttons">
-                        {(pagina != 0 && pagina < totalPagina) && (
-                            <button onClick={handleAnterior}>Anterior</button>
-                        )}
-                        {(pagina + 1 < totalPagina) && (
-                            <button onClick={handleSiguiente}>Siguiente</button>
-                        )}
+                        <div className="buttons-page">
+                            {(pagina != 0 && pagina < totalPagina) && (
+                                <button onClick={handleAnterior}>Anterior</button>
+                            )}
+                            {(pagina + 1 < totalPagina) && (
+                                <button onClick={handleSiguiente}>Siguiente</button>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}
