@@ -78,22 +78,22 @@ const AdopcionForm = () => {
         <form className="formulario" onSubmit={handleSubmit}>
             <label className="label">
                 ¿Tiene vivienda propia?
-                <input type="checkbox" checked={viviendaPropia} onChange={handleViviendaPropia} className="input" />
+                <input type="checkbox" required checked={viviendaPropia} onChange={handleViviendaPropia} className="input" />
             </label>
 
             <label className="label">
                 Número de personas que viven en el hogar:
-                <input type="number" value={nroPersonas} onChange={handleNroPersonas} className="input" />
+                <input type="number" required value={nroPersonas} onChange={handleNroPersonas} className="input" />
             </label>
 
             <label className="label">
                 Ingresos mensuales en el hogar:
-                <input type="number" value={ingresos} onChange={handleIngresos} className="input" />
+                <input type="number" required value={ingresos} onChange={handleIngresos} className="input" />
             </label>
 
             <label className="label">
                 Foto de su hogar:
-                <input type="file" accept="image/*" onChange={handleHogar} className="input" />
+                <input type="file" required accept="image/*" onChange={handleHogar} className="input" />
             </label>
 
             <button className="boton" type="submit">Enviar formulario</button>
