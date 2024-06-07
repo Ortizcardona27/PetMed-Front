@@ -1,73 +1,105 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 const AdopcionForm = () => {
-    const [tieneVivienda, setTieneVivienda] = useState(false);
-    const [numPersonas, setNumPersonas] = useState('');
-    const [ingresosMensuales, setIngresosMensuales] = useState('');
-    const [fotoHogar, setFotoHogar] = useState(null);
+    const [viviendaPropia, setViviendaPropia] = useState(false);
+    const [nroPersonas, setNroPersonas] = useState('');
+    const [ingresos, setIngresos] = useState('');
+    const [hogar, setHogar] = useState(null);
+    const [imageBase64, setImageBase64] = useState('');
+    const [respuesta, setRespuesta] = useState('');
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const mascotaId = queryParams.get('idMascota');
 
-    const handleTieneVivienda = (e) => {
-        setTieneVivienda(e.target.checked);
+    const handleViviendaPropia = (e) => {
+        setViviendaPropia(e.target.checked);
     };
 
-    const handleNumPersonas = (e) => {
+    const handleNroPersonas = (e) => {
         const valor = e.target.value;
         if (!isNaN(valor)) {
-            setNumPersonas(valor);
+            setNroPersonas(valor);
         }
     };
 
-    const handleIngresosMensuales = (e) => {
+    const handleIngresos = (e) => {
         const valor = e.target.value;
         if (!isNaN(valor)) {
-            setIngresosMensuales(valor);
+            setIngresos(valor);
         }
     };
 
-    const handleFotoHogar = (e) => {
-        setFotoHogar(e.target.files[0]);
+    const handleHogar = (e) => {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result.split(',')[1]; // Eliminar el prefijo
+                setImageBase64(base64String);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('tieneVivienda', tieneVivienda);
-        formData.append('numPersonas', numPersonas);
-        formData.append('ingresosMensuales', ingresosMensuales);
-        formData.append('fotoHogar', fotoHogar);
+        const payload = {
+            viviendaPropia: viviendaPropia,
+            nroPersonas: nroPersonas,
+            ingresos: ingresos,
+            casa: imageBase64,
+            idAdopcion: mascotaId
+        };
 
+        const tokenString = localStorage.getItem('token');
+        let token = {};
+        if (tokenString) {
+            token = JSON.parse(tokenString);
+        }
         fetch('api/adopciones/formulario/registrar', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token.access_token}`
+            },
             method: 'POST',
-            body: formData,
+            body: JSON.stringify(payload),
         })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
+            .then((response) => {
+                return response.json();
+            }).then((data) => {
+                setRespuesta(data.respuesta)
+            })
             .catch((error) => console.error(error));
     };
+
 
     return (
         <form className="formulario" onSubmit={handleSubmit}>
             <label className="label">
                 ¿Tiene vivienda propia?
-                <input type="checkbox" checked={tieneVivienda} onChange={handleTieneVivienda} className="input" />
+                <input type="checkbox" checked={viviendaPropia} onChange={handleViviendaPropia} className="input" />
             </label>
 
             <label className="label">
                 Número de personas que viven en el hogar:
-                <input type="number" value={numPersonas} onChange={handleNumPersonas} className="input" />
+                <input type="number" value={nroPersonas} onChange={handleNroPersonas} className="input" />
             </label>
 
             <label className="label">
                 Ingresos mensuales en el hogar:
-                <input type="number" value={ingresosMensuales} onChange={handleIngresosMensuales} className="input" />
+                <input type="number" value={ingresos} onChange={handleIngresos} className="input" />
             </label>
 
             <label className="label">
                 Foto de su hogar:
-                <input type="file" onChange={handleFotoHogar} className="input" />
+                <input type="file" accept="image/*" onChange={handleHogar} className="input" />
             </label>
 
             <button className="boton" type="submit">Enviar formulario</button>
+            {
+                respuesta && (<p>{respuesta} </p>)
+            }
         </form>
     )
 }

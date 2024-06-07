@@ -31,8 +31,8 @@ const Consultas = () => {
             });
     }, []);
 
-    const handleFormulario = () => {
-        navigate('adopcionForm')
+    const handleFormulario = (Id) => {
+        navigate(`/adopcionForm?idMascota=${Id}`)
     };
 
     const handleCita = () => {
@@ -44,8 +44,8 @@ const Consultas = () => {
             {loading ? (
                 <p>Cargando...</p>
             ) : (
-                solicitudes.map(solicitud => (
-                    <div key={solicitud.id} className="card">
+                solicitudes.map((solicitud, index) => (
+                    <div key={index} className="card">
                         <img src={`data:image/jpeg;base64,${solicitud.imagen}`} alt={solicitud.mascota} />
                         <h2>{solicitud.mascota}</h2>
                         <p>Fundación: {solicitud.fundacion}</p>
@@ -55,7 +55,7 @@ const Consultas = () => {
                         ) : (
                             <div className="botones">
                                 {
-                                    solicitud.formulario && (<button className="btn-formulario" onClick={() => handleFormulario()}>Formulario</button>)
+                                    solicitud.formulario && (<button className="btn-formulario" onClick={() => handleFormulario(solicitud.idAdopcion)}>Formulario</button>)
                                 }
                                 {
                                     solicitud.cita && (<button className="btn-cita" onClick={() => handleCita()}>Cita</button>)

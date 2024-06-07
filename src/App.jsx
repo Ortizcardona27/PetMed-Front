@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/infoMascota" element={<ModalMascota />} />
           <Route path="/consultas" element={<Consultas />} />
-          <Route path="consultas/adopcionForm" element={<AdopcionForm />} />
+          <Route path="/adopcionForm" element={<AdopcionForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registerform" element={<RegisterForm />} />
           <Route path="/iniciosesion" element={<InicioSesion />} />
