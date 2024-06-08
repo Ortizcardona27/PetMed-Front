@@ -29,6 +29,11 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+          <Link to="direccion" className="menu-link">
+            Dirección
+          </Link>
+        </li>
+        <li>
           <Link to="/logout" className="menu-link">
             Cerrar sesión
           </Link>

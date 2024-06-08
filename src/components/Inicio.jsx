@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+
 const Inicio = () => {
     const [mascotas, setMascotas] = useState({});
     const [pagina, setPagina] = useState(0);  // Cambiado a 1 ya que tu API empieza en página 1
     const [totalPagina, setTotalPagina] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+
 
     useEffect(() => {
         const fetchMascotas = async () => {
@@ -29,8 +32,14 @@ const Inicio = () => {
     }, [pagina]);
 
     const handleInfo = (mascota) => {
-        console.log(`Información mascota: ${mascota.nombre}`);
-        return <Link to={`/infoMascota?idMascota=${mascota.idMascota}`} className="Info">Más información</Link>;
+        const tokenString = localStorage.getItem('token');
+        if (tokenString) {
+            return <Link to={`/infoMascota?idMascota=${mascota.idMascota}`} className="Info">Más información</Link>;
+        }
+        else {
+            return <Link to={'/login'} className="Info">Más información</Link>;
+        }
+
     };
 
     const handleSiguiente = () => {

@@ -10,6 +10,7 @@ import Salir from "./components/Salir";
 import ModalMascota from "./components/ModalMascota";
 import Consultas from "./components/Consultas";
 import AdopcionForm from "./components/AdopcionForm";
+import Direccion from "./components/Direccion";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/adopcionForm" element={<AdopcionForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registerform" element={<RegisterForm />} />
+          <Route path="/direccion" element={<Direccion />} />
           <Route path="/iniciosesion" element={<InicioSesion />} />
           <Route path="/logout" element={<Salir />} />
 
