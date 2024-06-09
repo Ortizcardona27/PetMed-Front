@@ -51,6 +51,10 @@ const Direccion = () => {
             });
     };
 
+    const handleMunicipioChange = (event) => {
+        setIdMunicipio(event.target.value);
+    }
+
     const handleDireccionChange = (event) => {
         setDireccion(event.target.value);
     };
@@ -86,11 +90,21 @@ const Direccion = () => {
             },
         })
             .then(response => {
-                console.log(response.data);
+                alert(response.data.respuesta);
+                clearFormFields();
             })
             .catch(error => {
                 console.error(error);
             });
+    };
+
+    const clearFormFields = () => {
+        setDepartamentos([]);
+        setMunicipios([]);
+        setDepartamentoSeleccionado(null);
+        setIdMunicipio(null);
+        setDireccion('');
+        setNota('');
     };
 
     return (
@@ -110,7 +124,7 @@ const Direccion = () => {
                 </div>
                 <div className="formulario-group">
                     <label>Municipio:</label>
-                    <select name="municipio">
+                    <select name="municipio" onChange={handleMunicipioChange}>
                         <option value="">Seleccione un municipio</option>
                         {municipios.map(municipio => (
                             <option key={municipio.id} value={municipio.id}>{municipio.nombre}</option>
