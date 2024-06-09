@@ -453,3 +453,47 @@ select {
 .btn-azul:hover {
   background-color: #23527c;
 } 
+
+/* Estilos para el modal de las citas */
+.modalcita {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalcita-content {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  width: 30%;
+  margin: 40px auto;
+}
+
+.modalcita-header {
+  background-color: black;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.modalcita-body {
+  padding: 20px;
+}
+
+.modalcita-footer {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.close-modal {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}

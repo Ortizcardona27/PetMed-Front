@@ -11,6 +11,7 @@ import ModalMascota from "./components/ModalMascota";
 import Consultas from "./components/Consultas";
 import AdopcionForm from "./components/AdopcionForm";
 import Direccion from "./components/Direccion";
+import ModalCita from "./components/ModalCita";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registerform" element={<RegisterForm />} />
           <Route path="/direccion" element={<Direccion />} />
+          <Route path="/infoCita" element={<ModalCita />} />
           <Route path="/iniciosesion" element={<InicioSesion />} />
           <Route path="/logout" element={<Salir />} />
 

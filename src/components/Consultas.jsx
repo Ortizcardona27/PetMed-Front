@@ -35,8 +35,8 @@ const Consultas = () => {
         navigate(`/adopcionForm?idMascota=${Id}`)
     };
 
-    const handleCita = () => {
-
+    const handleCita = (Id) => {
+        navigate(`/infoCita?idAdopcion=${Id}`)
     };
 
     return (
@@ -58,7 +58,7 @@ const Consultas = () => {
                                     solicitud.formulario && (<button className="btn-formulario" onClick={() => handleFormulario(solicitud.idAdopcion)}>Formulario</button>)
                                 }
                                 {
-                                    solicitud.cita && (<button className="btn-cita" onClick={() => handleCita()}>Cita</button>)
+                                    solicitud.cita && (<button className="btn-cita" onClick={() => handleCita(solicitud.idAdopcion)}>Cita</button>)
                                 }
                             </div>
                         )}
