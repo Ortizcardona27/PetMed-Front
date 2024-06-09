@@ -337,7 +337,7 @@ button:hover {
 }
 
 .btn-formulario {
-  background-color: #337ab7;
+  background-color: #007bff;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -346,7 +346,7 @@ button:hover {
 }
 
 .btn-cita {
-  background-color: #337ab7;
+  background-color: #007bff;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -415,7 +415,7 @@ button:hover {
 }
 
 .formulario-header {
-  background-color: #337ab7;
+  background-color: #007bff;
   color: #fff;
   padding: 10px;
   text-align: center;
@@ -442,7 +442,7 @@ select {
 }
 
 .btn-azul {
-  background-color: #337ab7;
+  background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
   border: none;
