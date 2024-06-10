@@ -71,7 +71,7 @@ const RegisterForm = () => {
 
     if (Object.keys(formErrors).length === 0) {
       alert("Enviando formulario.")
-      
+
       const payload = {
         nroDocumento: nroDocumento,
         tipoDocumento: Number(tipoDocumento),
@@ -80,7 +80,7 @@ const RegisterForm = () => {
         contrasena: password,
       };
 
-      if(telefonoFijo !== '') {
+      if (telefonoFijo !== '') {
         payload.telefonoFijo = telefonoFijo;
       }
 
@@ -99,7 +99,7 @@ const RegisterForm = () => {
           payload.personaNatural.segundoNombre = segundoNombre
         }
       }
-      
+
       axios.post('/api/usuarios/usuario/nuevo', payload)
         .then(response => {
           alert(response.data.respuesta);
@@ -107,9 +107,9 @@ const RegisterForm = () => {
         })
         .catch(error => {
           console.log(error);
-          if(error.response && error.response.status !== 400) {
+          if (error.response && error.response.status !== 400) {
             alert(error.response.data.respuesta);
-          } 
+          }
           else {
             alert('Hay un error');
           }
@@ -320,6 +320,9 @@ const RegisterForm = () => {
         />
         {errors.password && <p className="error">{errors.password}</p>}
       </div>
+      <p>
+        <a href="/recuperarcontraseña" style={{ color: 'white' }}>¿Olvidaste tu contraseña?</a>
+      </p>
       <button type="submit" className="btn">
         Registrarse
       </button>

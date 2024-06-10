@@ -12,6 +12,7 @@ import Consultas from "./components/Consultas";
 import AdopcionForm from "./components/AdopcionForm";
 import Direccion from "./components/Direccion";
 import ModalCita from "./components/ModalCita";
+import RecuperarContraseña from "./components/RecuperarContraseña";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/adopcionForm" element={<AdopcionForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registerform" element={<RegisterForm />} />
+          <Route path="/recuperarcontraseña" element={<RecuperarContraseña />} />
           <Route path="/direccion" element={<Direccion />} />
           <Route path="/infoCita" element={<ModalCita />} />
           <Route path="/iniciosesion" element={<InicioSesion />} />
