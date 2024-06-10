@@ -21,6 +21,9 @@ function LoginForm() {
       <button onClick={onClic} className="button-blue">
         Iniciar sesión
       </button>
+      <p>
+        <a href="/recuperarcontraseña" style={{ color: 'black' }}>¿Olvidaste tu contraseña?</a>
+      </p>
     </div>
   );
 }

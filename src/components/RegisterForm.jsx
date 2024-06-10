@@ -320,9 +320,7 @@ const RegisterForm = () => {
         />
         {errors.password && <p className="error">{errors.password}</p>}
       </div>
-      <p>
-        <a href="/recuperarcontraseña" style={{ color: 'white' }}>¿Olvidaste tu contraseña?</a>
-      </p>
+
       <button type="submit" className="btn">
         Registrarse
       </button>
