@@ -498,3 +498,68 @@ select {
   cursor: pointer;
 }
 
+/* Estilos recupera contraseña */
+.email-recovery-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.email-recovery-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.email-label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.email-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.email-input:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.email-submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.email-submit-btn:hover {
+  background-color: #0069d9;
+}
+
+.email-response-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.email-response-title {
+  font-weight: bold;
+  color: #333;
+}
+
+.email-response-text {
+  font-size: 16px;
+  color: #666;
+}
